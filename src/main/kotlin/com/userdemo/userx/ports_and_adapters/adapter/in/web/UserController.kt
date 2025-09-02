@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(
     val getUserInfoUseCase: GetUserInfoUseCase
 ) {
+
     @GetMapping("users/{id}")
     fun getUserInfo(
         @PathVariable("id") id: Long
@@ -22,7 +23,10 @@ class UserController(
             return it
         }
         val userInfo = getUserInfoUseCase.getUserInfo(GetUserInfoUseCase.GetUserQuery(userId = UserId(id)))
-        return ResponseEntity.ok(mapOf("info" to userInfo.toString()))
+        return when(userInfo) {
+            null -> ResponseEntity.notFound().build<Unit>()
+            else -> ResponseEntity.ok(mapOf("info" to userInfo.toString()))
+        }
     }
 
 }
