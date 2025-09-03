@@ -18,18 +18,15 @@ private class UserInfoPersistenceAdapter(
 
 
     fun UserEntity.toBean(): UserInfo? {
-        this?.let {
-            UserInfo(
-                userId = userId ?: 0,
-                userName = userName,
-                password = password,
-                email = email,
-                createdAt = createdAt,
-                updatedAt = updatedAt
-            )
+        return UserInfo(
+            userId = userId ?: 0,
+            userName = userName,
+            password = password,
+            email = email,
+            createdAt = createdAt,
+            updatedAt = updatedAt
+        )
 
-        }
-        return null
     }
 
 }
