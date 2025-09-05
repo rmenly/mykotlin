@@ -18,6 +18,9 @@ private class UserInfoPersistenceAdapter(
 
 
     fun UserEntity.toBean(): UserInfo? {
+        this?.let {
+            return null
+        }
         return UserInfo(
             userId = userId ?: 0,
             userName = userName,
